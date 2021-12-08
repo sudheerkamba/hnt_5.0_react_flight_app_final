@@ -1,0 +1,22 @@
+.tab-list {  
+    border-bottom: 1px solid rgb(70, 71, 71);
+    border-top:1px solid rgb(70, 70, 70) ;
+    padding-left: 0;
+    background-color: rgb(150, 212, 236);
+  }
+  
+  .tab-list-item {
+    display: inline-block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5rem 0.75rem;
+    border-left:rgba(255, 0, 0, 0.925);
+    border-right:darkred;
+    
+  }
+  
+  .tab-list-active {
+    background-color: hsl(0, 0%, 100%);
+    border: solid #ccc;
+    border-width: 1px 1px 0 1px;
+  }
