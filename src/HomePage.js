@@ -45,16 +45,14 @@ function HomePage() {
     </div>
     </div> */}
             <div className="App">
-                <nav className="navbar navbar-expand-lg">
-                
-                    <div className="container">
-                        <img src={flight_logo} className="App-logo" alt="logo" width="1740px" />
-                        </div>
-                        </nav>
+                <nav className="navbar  navbar-default">
+                <img src={flight_logo} className="App-logo" alt="logo" width="100%" />
+        
+                </nav>
                         <nav className="navbar navbar-expand-lg ">
                         <div className="container">
-                        <br/>
-                        <div className="collapsed navbar-collapse">
+                       
+                        <div className="collapsed navbar-collapse ">
                         
                             <ul className="list-inline">
                                 <li className="list-inline-item">
@@ -68,6 +66,7 @@ function HomePage() {
                         </div>
                        
                     </div>
+                
                 </nav>
             </div>
             <div className="container">

@@ -1,6 +1,9 @@
 import Alert from 'react-bootstrap/Alert';
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../components/common/common_login.css'
 import React, { Component } from "react";
+import { Dropdown, DropdownButton, Form, InputGroup, NavDropdown } from 'react-bootstrap';
+import DropdownItem from '@restart/ui/esm/DropdownItem';
 
 class AddAirline extends Component {
     constructor() {
@@ -43,7 +46,9 @@ class AddAirline extends Component {
     submitHandler = (e) => {
         e.preventDefault();
         var formData = new FormData();
-        console.log(this.state.airline);
+        this.state.startTime=this.state.startTime+":00.000";
+        this.state.endTime=this.state.endTime+":00.000";
+        console.log(this.state.startTime);
         formData = {
             "airline": this.state.airline,"fromPlace": this.state.fromPlace, "toPlace": this.state.toPlace,
             "startTime": this.state.startTime,"endTime":this.state.endTime, "instrumentType": this.state.instrumentType, "mealsType": this.state.mealsType,
@@ -54,7 +59,7 @@ class AddAirline extends Component {
         axios({
             method: 'post',
             headers: { "Accept": "application/json", "content-type": "application/json",
-            "token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYzODk4NjY1OCwiaWF0IjoxNjM4OTY4NjU4fQ.u6JhTJTwXDv8x4AmT3M1wkZrHd2sFpg3wp4yDGwa6fN2bWHWWnjRMN0gzzS9AZfILbSRpypGINKklzmuktYDxA" },
+            "token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYzOTA4NTU2NiwiaWF0IjoxNjM5MDY3NTY2fQ.NGPaTJMfGAkpBgX5a-NHgB-kH0j8CC6rUDOLmUp2BL2EUv6NtMJTUEaCadudz1H5LJIBfI-wGdJdDXaP_ZgzEA" },
             url:'http://localhost:8090/admin/api/v1.0/flight/airline/inventory/add',
            // url:'http://localhost:8090/admin/api/v1.0/flight/admin/login',
             data: JSON.stringify(formData)
@@ -81,15 +86,11 @@ class AddAirline extends Component {
         return (
             <div className='container'>
                 <div className="row justify-content-center">
-                    <div className="col-md-6 text-center mb-5">
+                    
                         <h2 className="heading-section"><em>Register New Airlines</em></h2>
-                        <Alert dismissible="true" show={this.invisibleSuccess} variant="success">
-                            <h3>Airlines added Successfully!</h3>
-                        </Alert>
-                    </div>
                 </div>
-                <div className="row justify-content-center">
-                    <div className="col-md-6 col-lg-4">
+                <div className="auth-wrapper">
+                    <div className="auth-inner">
                         <div className="login-wrap p-0">
                             <form onSubmit={this.submitHandler} className="sign">
                                 <div className="form-group">
@@ -107,10 +108,10 @@ class AddAirline extends Component {
 
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Start Time" value={this.startTime} onChange={this.onStartTimeChange} required />
+                                    <input type="datetime-local" className="form-control" placeholder="Start Time" value={this.startTime} onChange={this.onStartTimeChange} required />
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="End Time" value={this.endTime} onChange={this.onEndTimeChange} required />
+                                    <input type="datetime-local" className="form-control" placeholder="End Time" value={this.endTime} onChange={this.onEndTimeChange} required />
 
                                 </div>
                                 <div className="form-group">
@@ -121,10 +122,10 @@ class AddAirline extends Component {
 
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Meals Type" value={this.mealsType} onChange={this.onMealsTypeChange} required />
-                                </div>
+                                <input type="text" className="form-control" placeholder="Meals Type" value={this.mealsType} onChange={this.onMealsTypeChange} required />
+                                              </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Ticket Cost" value={this.state.ticketCost} onChange={this.onCostChange} required />
+                                    <input type="text" className="form-control" placeholder="Ticket Cost" value={this.ticketCost} onChange={this.onCostChange} required />
 
                                 </div>
                                 <div className="form-group">
