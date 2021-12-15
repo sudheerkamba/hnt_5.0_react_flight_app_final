@@ -10,6 +10,7 @@ import '../components/common/common_login.css'
     
        const [password,setPassword]=useState('');
        const [username,setUserName]=useState('');
+       const [token,setToken]=useState('');
        let isAuthorized=false;
        const navigate=useNavigate();
              
@@ -35,12 +36,16 @@ import '../components/common/common_login.css'
             url:'http://localhost:8090/admin/api/v1.0/flight/admin/login',
             data:JSON.stringify(bodyFormData)}).then(res=>{
             console.log(res);
+            if(res.status===200)
+            {
             isAuthorized=true;
+            setToken("Bearer "+res.data.token);
+            }
         }).catch(error=>{
         console.error('Error',error.response)
     });
         if(isAuthorized)
-        return navigate('/AdminHome');
+        return navigate('/AdminHome',{state:{token:token}});
 
     }
          
@@ -48,7 +53,7 @@ import '../components/common/common_login.css'
         return(
             <div className="auth-wrapper">
         <div className="auth-inner">
-            <form onSubmit={submitHandler}>
+            <form >
                 <h3>Sign In</h3>
 
                 <div className="form-group">
@@ -70,7 +75,7 @@ import '../components/common/common_login.css'
                     </div>
                 </div>
 
-                <button type="submit"  className="btn btn-primary btn-block">Submit</button>
+                <button type="submit" onClick={(e)=>submitHandler(e)} className="btn btn-primary btn-block">Submit</button>
                 <p className="forgot-password text-right">
                     Forgot <a href="#">password?</a>
                     </p>

@@ -1,16 +1,23 @@
 import React, { Component ,ReactPropTypes} from 'react';
 import PropTypes from 'prop-types';
 import Tab from './Tab';
+import Button from '@restart/ui/esm/Button';
+import './Tabs.css'
+import HomePage from '../../HomePage';
+
+
+
 
 class Tabs extends Component {
   static propTypes = {
     children: PropTypes.instanceOf(Array).isRequired,
   }
+   
 
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: this.props.children[0].props.label,
+      activeTab: this.props.children[0].props.label
     };
   }
 
@@ -20,7 +27,10 @@ class Tabs extends Component {
 
 
   render() {
+   
+
     const {
+
       onClickTabItem,
       props: {
         children,
@@ -33,6 +43,8 @@ class Tabs extends Component {
     return (
       <div className="tabs">
         <ol className="tab-list">
+        <div className="row">
+          <div className="col-11">
           {children.map((child) => {
             const { label } = child.props;
 
@@ -45,7 +57,15 @@ class Tabs extends Component {
               />
             );
           })}
+         </div>
+         <div className="col-1">
+          <Button className="btn btn-outline-light" onClick={()=>
+        <HomePage/>
+          }>Logout</Button>
+          </div>
+          </div>
         </ol>
+        
         <div className="tab-content">
           {children.map((child) => {
             if (child.props.label !== activeTab) return undefined;

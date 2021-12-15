@@ -56,7 +56,7 @@ const HomeForm=()=>{
      console.log(expenseData);
     };
 return(
-    <div>
+    <div className="bg-img">
 <form onSubmit={submitHandler}>
       <div className='new-expense__controls'>
         <div className='new-expense__control'>

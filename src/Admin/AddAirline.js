@@ -2,15 +2,20 @@ import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../components/common/common_login.css'
 import React, { Component } from "react";
-import { Dropdown, DropdownButton, Form, InputGroup, NavDropdown } from 'react-bootstrap';
+import { Dropdown, DropdownButton, Form, FormSelect, InputGroup, NavDropdown } from 'react-bootstrap';
 import DropdownItem from '@restart/ui/esm/DropdownItem';
 
 class AddAirline extends Component {
-    constructor() {
-        super();
+    constructor(args) {
+        super(args);
         this.invisibleSuccess=false;
-        this.state = { airlines: {} };
+        this.state = { airlines: {},token:args.token , cities: []};
+       
+        console.log("Add airline: "+args.token);
+
     }
+
+    
     onAirlineChange = (e) => {
         this.setState({ airline: e.target.value });
     }
@@ -59,7 +64,7 @@ class AddAirline extends Component {
         axios({
             method: 'post',
             headers: { "Accept": "application/json", "content-type": "application/json",
-            "token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYzOTA4NTU2NiwiaWF0IjoxNjM5MDY3NTY2fQ.NGPaTJMfGAkpBgX5a-NHgB-kH0j8CC6rUDOLmUp2BL2EUv6NtMJTUEaCadudz1H5LJIBfI-wGdJdDXaP_ZgzEA" },
+            "token": this.state.token},
             url:'http://localhost:8090/admin/api/v1.0/flight/airline/inventory/add',
            // url:'http://localhost:8090/admin/api/v1.0/flight/admin/login',
             data: JSON.stringify(formData)
@@ -79,57 +84,116 @@ class AddAirline extends Component {
 
     }
     componentDidMount(){
-        
+        this.setState({
+            cities: [
+                {name: 'Hyderabad'},
+                {name: 'Bangalore'},
+                {name: 'Chennai'},
+                {name: 'Mumbai'},
+                {name: 'Delhi'}
+,            ]
+        });
     }
     render() {
         
+
+	 
+      
         return (
             <div className='container'>
                 <div className="row justify-content-center">
                     
                         <h2 className="heading-section"><em>Register New Airlines</em></h2>
                 </div>
-                <div className="auth-wrapper">
-                    <div className="auth-inner">
+                <div className="auth-wrapper-one">
+                    <div className="auth-inner-one">
                         <div className="login-wrap p-0">
                             <form onSubmit={this.submitHandler} className="sign">
-                                <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Airline" value={this.airline} onChange={this.onAirlineChange} required />
+                                <div className="row">
+                                <div className="col">
+                                    <input type="text" className="form-control" id="floatingInput" placeholder="Airline" value={this.airline} onChange={this.onAirlineChange} required />
+                                    {/* <label className="fs-6 fw-lighter" for="floatingInput">Airline</label> */}
                                 </div>
-                                <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="Instrument Type" value={this.instrumentType} onChange={this.onInstruemntChange} required />
-
                                 </div>
-                                < div className="form-group">
-                                    <input type="text" className="form-control" placeholder="From" value={this.fromPlace} onChange={this.onFromPlaceChange} required />
+                                <br/>
+                                <div className="row">
+                                <div className="col">
+                                    <input type="text" className="form-control" id="floatingInstrument" placeholder="Instrument Type" value={this.instrumentType} onChange={this.onInstruemntChange} required />
                                 </div>
-                                <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="To" value={this.toPlace} onChange={this.onToPlaceChange} required />
-
                                 </div>
-                                <div className="form-group">
+                                <br/>
+                                <div className="row">
+                               
+                                < div className="col">
+                               
+                                    <FormSelect  className="form-control" placeholder="From" value={this.fromPlace} onChange={this.onFromPlaceChange} required >
+                                    
+                                    <option className="options">Select Source</option>
+                                        {this.state.cities.length >0 && this.state.cities.map(item =>		
+			(<option value={item.name}>{item.name}</option>)
+	)}
+                                        </FormSelect>
+                                </div>
+                              
+                                <div className="col">
+                                
+                                    <FormSelect  className="form-control" placeholder="To" value={this.toPlace} onChange={this.onToPlaceChange} required >
+                                    
+                                    <option className="options">Select Destination</option>
+                                        {this.state.cities.length >0 && this.state.cities.map(item =>		
+			(<option value={item.name}>{item.name}</option>)
+	)}
+                                        </FormSelect>
+                              
+                                </div>
+                                
+                                </div>
+                                <br/>
+                                <div className="row">
+                                <div className="col-sm-6">
+                                   
                                     <input type="datetime-local" className="form-control" placeholder="Start Time" value={this.startTime} onChange={this.onStartTimeChange} required />
+                              
                                 </div>
-                                <div className="form-group">
+                               
+                                <div className="col-sm-6">
+                                
+                                
                                     <input type="datetime-local" className="form-control" placeholder="End Time" value={this.endTime} onChange={this.onEndTimeChange} required />
-
+                    
+                               
                                 </div>
-                                <div className="form-group">
+                                </div>
+                                <br/>
+                                <div className="row">
+                                <div className="col">
                                     <input type="text" className="form-control" placeholder="Business CLass Seats" value={this.businessClassSeats} onChange={this.onBusinsSeatChange} required />
                                 </div>
-                                <div className="form-group">
-                                    <input type="text" className="form-control" placeholder="NonBusiness CLass Seats" value={this.nonBusinessClassSeats} onChange={this.onNonBusinsSeatChange} required />
-
                                 </div>
-                                <div className="form-group">
+                                <br/>
+                                <div className="row">
+                                <div className="col">
+                                    <input type="text" className="form-control" placeholder="NonBusiness CLass Seats" value={this.nonBusinessClassSeats} onChange={this.onNonBusinsSeatChange} required />
+                                </div>    
+                                </div>
+                                <br/>
+                                <div className="row">
+                                <div className="col">
                                 <input type="text" className="form-control" placeholder="Meals Type" value={this.mealsType} onChange={this.onMealsTypeChange} required />
                                               </div>
-                                <div className="form-group">
+                                              </div>
+                                              <br/>
+                                <div className="row">
+                                <div className="col">
                                     <input type="text" className="form-control" placeholder="Ticket Cost" value={this.ticketCost} onChange={this.onCostChange} required />
 
                                 </div>
-                                <div className="form-group">
+                                </div>
+                                <br/>
+                                <div className="row">
+                                <div className="col">
                                     <button type="submit" className="form-control btn btn-primary submit px-3">Add Airline</button>
+                                </div>
                                 </div>
                                 <div className="form-group d-md-flex">
                                     <div className="w-50">

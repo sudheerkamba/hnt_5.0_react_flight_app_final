@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Assistant');
+
+body {
+    background: #eee;
+    font-family: Assistant, sans-serif
+}
+th{
+    text-align: center;
+}
+.flight-logo{
+    width: 120px;
+    height:60px
+}
+.vertical-centr{
+    vertical-align: middle;
+    text-align: center;
+}
+
+.cell-1 {
+    border-collapse: separate;
+    border-spacing: 0 4em;
+    background: #fff;
+    border-bottom: 5px solid transparent;
+    background-clip: padding-box
+}
+
+thead {
+    background: #dddcdc
+}
+.bg_airlines{
+background-color: darkgray;
+}

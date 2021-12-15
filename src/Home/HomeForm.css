@@ -22,5 +22,10 @@
 }
 
 .new-expense__actions {
-  text-align: right;
+  text-align: center;
+}
+
+.bg-img{
+  background-image: url('../flight_logo.png');
+  background-size: cover;
 }

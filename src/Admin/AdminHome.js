@@ -1,24 +1,36 @@
-import React from 'react';
+import Button from '@restart/ui/esm/Button';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Tabs from '../components/Tabs/Tabs';
 import '../components/Tabs/Tabs.css'
 import AddAirline from './AddAirline';
+import ManageAirlines from './ManageAirlines';
 
 
 
-function AdminHome() {
+
+function AdminHome(props) {
+    const locat=useLocation();
+    
     return (
-        // <div className="tab-pane">
+
         <div>
             <Tabs>
-                <div label="Manage Schedules">
-                    See ya later, <em>Alligator</em>!
+                <div label="Airlines">
+                < AddAirline
+                token={locat.state.token}/>
+                   
                 </div>
                 <div label="Manage Airlines">
-                
-                   < AddAirline/>
+                <ManageAirlines
+                token={locat.state.token}/>
+                   
                 </div>
                 <div label="Reports">
                     Nothing to see here, this tab is <em>extinct</em>!
+                </div>
+                <div>
+                <Button name="Logout" className="btn btn-danger"/>
                 </div>
             </Tabs>
         </div>

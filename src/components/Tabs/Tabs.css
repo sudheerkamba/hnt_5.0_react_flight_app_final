@@ -2,7 +2,8 @@
     border-bottom: 1px solid rgb(70, 71, 71);
     border-top:1px solid rgb(70, 70, 70) ;
     padding-left: 0;
-    background-color: rgb(150, 212, 236);
+    color: cornsilk;
+    background-color: rgb(25, 96, 124);
   }
   
   .tab-list-item {
@@ -14,9 +15,8 @@
     border-right:darkred;
     
   }
-  
   .tab-list-active {
-    background-color: hsl(0, 0%, 100%);
+    background-color:gray;
     border: solid #ccc;
     border-width: 1px 1px 0 1px;
   }
