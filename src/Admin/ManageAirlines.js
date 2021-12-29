@@ -65,7 +65,9 @@ class ManageAirlines extends Component{
           method: 'get',
           headers: { "Accept": "application/json", "content-type": "application/json",
           "token": this.state.token},
-          url:'http://localhost:8090/admin/api/v1.0/flight/airlines',
+        url:'http://localhost:8090/admin/api/v1.0/flight/airlines',
+           // url:'http://18.216.162.83:9090/api/v1.0/flight/airlines'
+          // url:'https://gac2lc1ze2.execute-api.us-east-2.amazonaws.com/dev/login/airlines'
          }).then((res)=>{
              console.log(res)
              this.setState({airlines: res.data});
@@ -136,9 +138,9 @@ console.log(this.state.airlines)
         )
                          
               
-        //   </ListGroupItem>
+        
        } )}
-      {/* </ListGroup> */}
+     
       
               </tbody>
       </table>

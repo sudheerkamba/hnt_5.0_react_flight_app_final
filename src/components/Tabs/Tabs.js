@@ -4,6 +4,9 @@ import Tab from './Tab';
 import Button from '@restart/ui/esm/Button';
 import './Tabs.css'
 import HomePage from '../../HomePage';
+import { BrowserRouter, Link } from 'react-router-dom';
+import AdminLogin from '../../Admin/AdminLogin';
+import { Logout } from '../common/Logout';
 
 
 
@@ -16,21 +19,50 @@ class Tabs extends Component {
 
   constructor(props) {
     super(props);
+    let def=null;
+   console.log("vall: "+ this.props.defaultval)
+    if(this.props.defaultval===null ||  this.props.defaultval===undefined || this.props.defaultval==='search'){
     this.state = {
-      activeTab: this.props.children[0].props.label
-    };
+      activeTab: this.props.children[1].props.label
+    };}
+    else if(this.props.defaultval==='book') {
+      this.state = {
+        activeTab: this.props.children[0].props.label
+      };
+    }
   }
 
   onClickTabItem = (tab) => {
     this.setState({ activeTab: tab });
+    
+    this.def='search'
   }
+onLogout=(e)=>{
+  return
+        
+        <AdminLogin/>
 
+
+}
 
   render() {
+    console.log("def: "+this.def+"oncl: "+this.oncl+"def: "+this.props.defaultval)
+    if(this.props.defaultval==='book' 
+    && this.def!=='search'
+    ) {
+      this.state = {
+        activeTab: this.props.children[0].props.label
+      };
+      this.def='search'
+      
+    }
+    this.def='notsearch'
+    
    
 
-    const {
 
+    const {
+      onLogout,
       onClickTabItem,
       props: {
         children,
@@ -59,9 +91,8 @@ class Tabs extends Component {
           })}
          </div>
          <div className="col-1">
-          <Button className="btn btn-outline-light" onClick={()=>
-        <HomePage/>
-          }>Logout</Button>
+         
+            <Logout/>
           </div>
           </div>
         </ol>

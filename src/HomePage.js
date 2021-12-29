@@ -11,6 +11,7 @@ import { React } from 'react';
 import { useNavigate } from 'react-router-dom'
 import AdminLogin from './Admin/AdminLogin';
 import AdminHome from './Admin/AdminHome';
+import Button from '@restart/ui/esm/Button';
 
 
 
@@ -23,11 +24,11 @@ function HomePage() {
 
     const onAdminClick = (event) => {
         const { redirect } = true;
-        navigate('/AdminLog')
+        navigate('/AdminLog',{state:{role:"Admin"}})
 
     };
     const onUserClick = (event) => {
-
+        navigate('/AdminLog',{state:{role:"User"}})
     };
     return (
         <div>
@@ -45,23 +46,24 @@ function HomePage() {
     </div>
     </div> */}
             <div className="App">
-                <nav className="navbar  navbar-default">
+                <nav className="navbar  navbar-default ">
                 <img src={flight_logo} className="App-logo" alt="logo" width="100%" />
         
                 </nav>
-                        <nav className="navbar navbar-expand-lg ">
+                        <nav className="navbar navbar-expand-lg bg-secondary">
                         <div className="container">
                        
-                        <div className="collapsed navbar-collapse ">
+                        <div className="collapsed navbar-collapse justify-content-center">
                         
                             <ul className="list-inline">
                                 <li className="list-inline-item">
-                                    <button className="bg-light" type="button" onClick={onAdminClick}>Admin</button>
+                                    <button class="btn btn-outline-light " type="button" onClick={onAdminClick}>Admin</button>
                                 </li>
                                 <li className="list-inline-item"> 
-                                <button className="bg-light" type="button" onClick={onUserClick}>User</button>
+                                <button class="btn btn-outline-light" type="button" onClick={onUserClick}>User</button>
                                 </li>
                             </ul>
+                            
                             
                         </div>
                        
@@ -69,7 +71,7 @@ function HomePage() {
                 
                 </nav>
             </div>
-            <div className="container">
+            <div className="container-cover-fill">
             <HomeForm></HomeForm>
             </div>
 

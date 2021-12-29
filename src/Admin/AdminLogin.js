@@ -1,19 +1,22 @@
 
 import React,{ Component,useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../components/common/common_login.css'
 //import '.../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
  const AdminLogin=()=>{
-    
+    const loc= useLocation();
+   
        const [password,setPassword]=useState('');
        const [username,setUserName]=useState('');
        const [token,setToken]=useState('');
        let isAuthorized=false;
+       let roleCD='';
        const navigate=useNavigate();
-             
+       loc.state.role==="Admin"? (roleCD="Admin"):(loc.state.role==="User"?roleCD="User":roleCD="")
+       console.log(loc.state.role);     
 
    
      const userChangeHandler=(event)=>{
@@ -30,22 +33,35 @@ import '../components/common/common_login.css'
         //bodyFormData.append('password', password); 
         bodyFormData={"username":username,"password":password}
         const axios=require('axios');
+        
+        console.log("roleCD:"+roleCD);
+        if(roleCD==="Admin"){
         axios({
             method: 'post',
             headers: {"Accept": "application/json", "content-type": "application/json" },
             url:'http://localhost:8090/admin/api/v1.0/flight/admin/login',
+          //url:'http://18.216.162.83:9090/api/v1.0/flight/admin/login',
+          //url:'https://gac2lc1ze2.execute-api.us-east-2.amazonaws.com/dev/login',
             data:JSON.stringify(bodyFormData)}).then(res=>{
             console.log(res);
             if(res.status===200)
             {
             isAuthorized=true;
             setToken("Bearer "+res.data.token);
+            if(isAuthorized)
+            navigate('/AdminHome',{state:{token:"Bearer "+res.data.token}});
             }
         }).catch(error=>{
         console.error('Error',error.response)
     });
-        if(isAuthorized)
-        return navigate('/AdminHome',{state:{token:token}});
+       
+}else{
+    console.log(loc.state.airlines)
+    if(undefined===loc.state.airlines || null===loc.state.airlines)
+    username==="user"&&password==="user"?navigate('/UserHome',{state:{logged:true,default:'search'}}):alert("Invalid credentials")
+    else
+    username==="user"&&password==="user"?navigate('/UserHome',{state:{logged:true,default:'book',airlines:loc.state.airlines}}):alert("Invalid credentials")
+}
 
     }
          
@@ -53,8 +69,8 @@ import '../components/common/common_login.css'
         return(
             <div className="auth-wrapper">
         <div className="auth-inner">
-            <form >
-                <h3>Sign In</h3>
+            <div >
+                <h3>{loc.state.role}{" "}Sign In</h3>
 
                 <div className="form-group">
                     <label>UserName</label>
@@ -80,7 +96,7 @@ import '../components/common/common_login.css'
                     Forgot <a href="#">password?</a>
                     </p>
 
-            </form>
+            </div>
             </div>
             </div>
 

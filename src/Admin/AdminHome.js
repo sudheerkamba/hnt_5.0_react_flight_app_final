@@ -11,7 +11,7 @@ import ManageAirlines from './ManageAirlines';
 
 function AdminHome(props) {
     const locat=useLocation();
-    
+   
     return (
 
         <div>

@@ -8,10 +8,7 @@ import DropdownItem from '@restart/ui/esm/DropdownItem';
 class AddAirline extends Component {
     constructor(args) {
         super(args);
-        this.invisibleSuccess=false;
         this.state = { airlines: {},token:args.token , cities: []};
-       
-        console.log("Add airline: "+args.token);
 
     }
 
@@ -29,9 +26,8 @@ class AddAirline extends Component {
     onToPlaceChange = (e) => {
         this.setState({ toPlace: e.target.value });
     }
-    onStartTimeChange = (e) => {
-        this.setState({ startTime: e.target.value });
-    }
+    onStartTimeChange = (e) => this.setState({ startTime: e.target.value })
+    
     onEndTimeChange = (e) => {
         this.setState({ endTime: e.target.value });
     }
@@ -66,16 +62,15 @@ class AddAirline extends Component {
             headers: { "Accept": "application/json", "content-type": "application/json",
             "token": this.state.token},
             url:'http://localhost:8090/admin/api/v1.0/flight/airline/inventory/add',
-           // url:'http://localhost:8090/admin/api/v1.0/flight/admin/login',
+          //  url:'http://18.216.162.83:9090/api/v1.0/flight/airline/inventory/add',
             data: JSON.stringify(formData)
         }).then((res) =>{ 
             console.log(res.status);
             if(res.status===200)
             {
-                this.invisibleSuccess=true;
             this.setState({ ticketCost:null });
-            console.log(this.invisibleSuccess);
             console.log(res)
+            alert("Airlines added successfully")
             }
         }).catch(error=>{
             console.error('Error',error.response)
@@ -179,7 +174,14 @@ class AddAirline extends Component {
                                 <br/>
                                 <div className="row">
                                 <div className="col">
-                                <input type="text" className="form-control" placeholder="Meals Type" value={this.mealsType} onChange={this.onMealsTypeChange} required />
+                                
+                                <FormSelect  className="form-control" placeholder="Meals Type" value={this.mealsType} onChange={this.onMealsTypeChange} required >
+                                    
+                                    <option className="form-control">Select MealType</option>
+                                    <option className="options">Veg</option>
+                                    <option className="options">NonVeg</option>
+                                    </FormSelect>
+                              
                                               </div>
                                               </div>
                                               <br/>
