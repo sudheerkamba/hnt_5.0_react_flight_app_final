@@ -9,8 +9,7 @@ class AddAirline extends Component {
     constructor(args) {
         super(args);
         this.state = { airlines: {},token:args.token , cities: []};
-
-    }
+        }
 
     
     onAirlineChange = (e) => {
@@ -68,9 +67,10 @@ class AddAirline extends Component {
             console.log(res.status);
             if(res.status===200)
             {
-            this.setState({ ticketCost:null });
+            
             console.log(res)
             alert("Airlines added successfully")
+            
             }
         }).catch(error=>{
             console.error('Error',error.response)

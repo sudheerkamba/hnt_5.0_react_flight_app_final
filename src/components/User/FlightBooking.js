@@ -88,9 +88,17 @@ if(airlines===''){
             
             console.log(res)
             alert("Ticket Booked successfully")
+            setName('')
+            setEmailId('')
+            setMealsType('')
+            setSeatsCount('')
+            setPname('')
+            setPage('')
+            setPgender('')
             }
         }).catch(error=>{
             console.error('Error',error.response)
+            alert("Ticket Booking Failed")
         });
     }
     return (

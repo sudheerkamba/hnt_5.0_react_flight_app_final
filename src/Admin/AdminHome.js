@@ -5,6 +5,8 @@ import Tabs from '../components/Tabs/Tabs';
 import '../components/Tabs/Tabs.css'
 import AddAirline from './AddAirline';
 import ManageAirlines from './ManageAirlines';
+import { Reports } from './Reports';
+
 
 
 
@@ -27,7 +29,7 @@ function AdminHome(props) {
                    
                 </div>
                 <div label="Reports">
-                    Nothing to see here, this tab is <em>extinct</em>!
+                    <Reports/>
                 </div>
                 <div>
                 <Button name="Logout" className="btn btn-danger"/>

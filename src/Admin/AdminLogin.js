@@ -55,12 +55,14 @@ import '../components/common/common_login.css'
         console.error('Error',error.response)
     });
        
-}else{
+}else if(roleCD==="User"){
     console.log(loc.state.airlines)
     if(undefined===loc.state.airlines || null===loc.state.airlines)
     username==="user"&&password==="user"?navigate('/UserHome',{state:{logged:true,default:'search'}}):alert("Invalid credentials")
     else
     username==="user"&&password==="user"?navigate('/UserHome',{state:{logged:true,default:'book',airlines:loc.state.airlines}}):alert("Invalid credentials")
+}else{
+    alert("Invalid Credentials")
 }
 
     }
